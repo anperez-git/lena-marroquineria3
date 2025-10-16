@@ -1,0 +1,155 @@
+// Paleta de colores
+$color-principal: #3e2723;
+$color-secundario: #d7ccc8;
+$color-acento: #a1887f;
+$color-hover: #6d4c41;
+$color-fondo: #f9f6f3;
+$color-texto: #2c2c2c;
+
+// Tipografías
+$fuente-titulo: 'Playfair Display', serif;
+$fuente-texto: 'Lora', serif;
+
+// Transiciones
+$transicion: all 0.3s ease;
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin sombra-suave {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+header {
+  background-color: $color-principal;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 0;
+
+  h1 {
+    font-family: $fuente-titulo;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+}
+nav {
+  background-color: $color-secundario;
+  font-family: $fuente-texto;
+  @include sombra-suave;
+
+  ul.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include flex-center;
+    gap: 2rem;
+
+    li {
+      position: relative;
+
+      a {
+        color: $color-principal;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        transition: $transicion;
+
+        &:hover {
+          color: $color-hover;
+        }
+      }
+
+      ul {
+        display: none;
+        position: absolute;
+        background-color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        min-width: 180px;
+        list-style: none;
+        top: 100%;
+        left: 0;
+        @include sombra-suave;
+
+        li {
+          margin: 0.5rem 0;
+
+          a {
+            color: $color-texto;
+            font-size: 0.95rem;
+
+            &:hover {
+              color: $color-acento;
+            }
+          }
+        }
+      }
+
+      &:hover ul {
+        display: block;
+      }
+    }
+  }
+}
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: $color-fondo;
+
+  .item {
+    .img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      @include sombra-suave;
+
+      img {
+        width: 100%;
+        display: block;
+        transition: transform 0.4s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      .overlay {
+        @include flex-center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(62, 39, 35, 0.8);
+        color: white;
+        font-family: $fuente-texto;
+        font-size: 1rem;
+        padding: 0.8rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &:hover .overlay {
+        opacity: 1;
+      }
+    }
+  }
+}
+@import 'variables';
+@import 'mixins';
+@import 'header';
+@import 'nav';
+@import 'galeria';
+
+body {
+  margin: 0;
+  background-color: $color-fondo;
+  color: $color-texto;
+  font-family: $fuente-texto;
+}
