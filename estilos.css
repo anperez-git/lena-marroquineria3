@@ -1,17 +1,179 @@
-/* Error: Can't find stylesheet to import.
- *     ,
- * 144 | @import 'variables';
- *     |         ^^^^^^^^^^^
- *     '
- *   style.scss 144:9  root stylesheet */
+header {
+  background-color: #c7897e;       /* color de fondo */
+  padding: 2rem 0;                 /* espacio arriba y abajo */
+  text-align: center;              /* centra el contenido horizontalmente */
+}
 
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
+header h1 {
+  font-family: 'Playfair Display', serif; /* nueva fuente (ya cargada de Google Fonts) */
+  color: #ffffff;                        /* color blanco */
+  font-size: 3rem;                        /* tamaño grande */
+  letter-spacing: 2px;                    /* espaciado entre letras */
+  margin: 0;                              /* eliminar margen por defecto */
+  font-weight: 600;                       /* grosor de la fuente */
+}
+/* --- Header --- */
+header {
+  background-color: #3e2723;
+  padding: 1rem 0;  /* antes estaba 2rem, ahora menos espacio arriba y abajo */
+  text-align: center;
+}
+
+/* --- Título dentro del header --- */
+header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  margin: 0 0 0.5rem 0; /* reduce margen inferior */
+  font-weight: 600;
+}
+
+/* --- Menú de navegación --- */
+nav {
+  background-color: #d7ccc8;
+  padding: 0.5rem 0;   /* antes podía ser 1rem, ahora menos espacio */
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+/* --- Menú principal --- */
+nav {
+  background-color: #d7ccc8;
+  padding: 1rem 0;           /* más espacio arriba y abajo */
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Lista principal centrada con más espacio entre items */
+nav ul.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;   /* centra horizontalmente */
+  align-items: flex-start;   /* items alineados arriba */
+  gap: 4rem;                 /* aumenta el espacio entre links */
+}
+
+/* Enlaces del menú */
+nav ul.menu > li > a {
+  text-decoration: none;
+  color: #3e2723;
+  font-family: 'Lora', serif;
+  font-weight: bold;
+  font-size: 1.2rem;        /* un poquito más grande si querés */
+  padding: 0.75rem 0;       /* más espacio vertical dentro del link */
   display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a     \2577 \a 144 \2502  @import 'variables';\d\a     \2502          ^^^^^^^^^^^\a     \2575 \a   style.scss 144:9  root stylesheet";
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul.menu > li > a:hover {
+  color: #6d4c41;
+  transform: scale(1.05);
+}
+
+/* Submenús */
+nav ul.menu li ul {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  list-style: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+nav ul.menu li:hover ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+nav ul.menu li ul li a {
+  display: block;
+  color: #3e2723;
+  padding: 0.5rem 0.8rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+nav ul.menu li ul li a:hover {
+  background-color: #f5f5f5;
+}
+
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  grid-template-rows: repeat(2, auto);   /* 2 filas automáticas */
+  gap: 1.5rem;                           /* espacio entre imágenes */
+  padding: 2rem;
+  background-color: #f9f6f3;
+  justify-items: center;                 /* centra los elementos dentro del grid */
+}
+
+.galeria .item {
+  width: 100%;
+  max-width: 320px; /* limita el ancho máximo de cada imagen */
+}
+
+.galeria .img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.galeria img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.galeria img:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+.galeria .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(62, 39, 35, 0.8);
+  color: white;
+  text-align: center;
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  padding: 0.8rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.4s ease;
+}
+
+.galeria .img-container:hover .overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Diseño adaptable (responsivo) --- */
+@media (max-width: 768px) {
+  .galeria {
+    grid-template-columns: repeat(2, 1fr); /* 2 imágenes por fila en tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .galeria {
+    grid-template-columns: 1fr; /* 1 imagen por fila en celulares */
+  }
 }
